@@ -18,14 +18,15 @@ public class NumberedSquare {
         paint.setColor(Color.WHITE);
 
         //10 percent of screen size
-        squareWidth = w * 0.1f;
-        squareHeight = h * 0.1f;
+        squareWidth = w * 0.2f;
+        squareHeight = h * 0.13f;
 
         // random x y positions on map
-        float x = (float) (Math.random() * w);
-        float y = (float) (Math.random() * h);
+        float x = (float) (Math.random() * (w - squareWidth));
+        float y = (float) (Math.random() * (h - squareHeight));
 
-        bounds = new RectF( x, y, squareWidth, squareHeight);
+        bounds = new RectF(x , y, x + squareWidth, y +  squareHeight);
+
     }
 
 
