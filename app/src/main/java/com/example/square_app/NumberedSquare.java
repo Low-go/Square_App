@@ -30,8 +30,8 @@ public class NumberedSquare {
         textPaint.setTypeface(Typeface.DEFAULT_BOLD); // lets see if this typeface stuff does anything
 
         //10 percent of screen size
-        squareWidth = w * 0.25f;
-        squareHeight = h * 0.15f;
+        squareWidth = w * 0.22f;
+        squareHeight = h * 0.12f;
 
         // random x y positions on map
         float x = (float) (Math.random() * (w - squareWidth)); // we subtract the squares size to make sure it does not get out of bounds
@@ -48,4 +48,10 @@ public class NumberedSquare {
         c.drawRect(bounds, outlinePaint);
         c.drawText(numberText, bounds.centerX() - 9f, bounds.centerY() + 1.8f, textPaint);
     }
+
+
+    public RectF getBounds(){
+        return bounds;
+    }
 }
+

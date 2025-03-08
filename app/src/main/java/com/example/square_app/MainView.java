@@ -48,12 +48,29 @@ public class MainView extends View {
     //lets make a function to create squares
     public void createSquares(int quantity){
 
+        int i = 0;
         // creates as many squares as passed in
-        for (int i = 0; i < quantity; i ++ ){
+        while (i < quantity){
+            NumberedSquare tempSquare;
+            boolean intersects;
 
-            // do i need to keep track of these?
-            squares.add(new NumberedSquare(screenWidth, screenHeight));
+            do { // make sure i create on square
 
+                // do i need to keep track of these?
+                tempSquare = new NumberedSquare(screenWidth, screenHeight);
+                intersects = false;
+
+                for (NumberedSquare square : squares){
+                    //this is wild logic, i cant use intersect on the instance, need to do it on the actual bounds
+                    if (tempSquare.getBounds().intersect(square.getBounds())){
+                        intersects = true;
+                        break;
+                    }
+                }
+            } while (intersects);
+
+            squares.add(tempSquare);
+            i++;
         }
     }
 
