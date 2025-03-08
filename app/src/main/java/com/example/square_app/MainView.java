@@ -22,7 +22,6 @@ public class MainView extends View {
         super(c);
         gameStarted = false;
         squares = new ArrayList<>();
-
     }
 
 
@@ -36,10 +35,26 @@ public class MainView extends View {
             gameStarted = true;
             Log.d("test", "Screen Width: " + screenWidth);;
             Log.d("test", "Screen Height: " + screenHeight);
-            testSquare = new NumberedSquare(screenWidth, screenHeight);
+            createSquares(5);
         }
 
-        testSquare.draw(c);
+        for (int i = 0; i < squares.size(); i++){
+//            NumberedSquare temp = squares.get(i);
+//            temp.draw(c, i);
+            squares.get(i).draw(c,i); // lets see if both of these are valid or not
+        }
+    }
+
+    //lets make a function to create squares
+    public void createSquares(int quantity){
+
+        // creates as many squares as passed in
+        for (int i = 0; i < quantity; i ++ ){
+
+            // do i need to keep track of these?
+            squares.add(new NumberedSquare(screenWidth, screenHeight));
+
+        }
     }
 
 }

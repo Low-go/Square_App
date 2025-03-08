@@ -11,6 +11,7 @@ public class NumberedSquare {
     private float squareWidth, squareHeight;
 
     private Paint outlinePaint;
+
     private Paint textPaint;
     private RectF bounds;
 
@@ -18,10 +19,9 @@ public class NumberedSquare {
 
         // this is for the outline
         outlinePaint = new Paint();
-        outlinePaint.setColor(Color.WHITE);
+        outlinePaint.setColor(Color.RED);
         outlinePaint.setStyle(Paint.Style.STROKE);
         outlinePaint.setStrokeWidth(10f);
-
 
         // this is for the text in the center
         textPaint = new Paint();
@@ -42,9 +42,10 @@ public class NumberedSquare {
     }
 
 
-    public void draw(Canvas c){
+    public void draw(Canvas c, int number){
 
+        String numberText = String.valueOf(number + 1); // number that will be displayed
         c.drawRect(bounds, outlinePaint);
-        c.drawText("5", bounds.centerX() - 6f, bounds.centerY() + 1f, textPaint);
+        c.drawText(numberText, bounds.centerX() - 9f, bounds.centerY() + 1.8f, textPaint);
     }
 }
