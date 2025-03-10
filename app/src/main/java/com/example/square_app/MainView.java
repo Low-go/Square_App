@@ -22,7 +22,7 @@ public class MainView extends View {
     public MainView(Context c){
         super(c);
         gameStarted = false;
-        squares = new ArrayList<>();
+
     }
 
 
@@ -48,6 +48,9 @@ public class MainView extends View {
 
     //lets make a function to create squares
     public void createSquares(int quantity){
+
+        // initialized here so that sqaure size is consistent/ wiped when called again
+        squares = new ArrayList<>();
 
         int i = 0;
         // creates as many squares as passed in
@@ -84,6 +87,9 @@ public class MainView extends View {
 
         if (eventAction == MotionEvent.ACTION_DOWN){
             System.out.println("THE SCREEN WAS PRESSED");
+            createSquares(5);
+            invalidate(); // used to invoke onDraw again
+            System.out.println("here is the square size " + squares.size());
         }
         return false;
     }
