@@ -2,6 +2,7 @@ package com.example.square_app;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.View;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -54,7 +55,7 @@ public class MainView extends View {
             NumberedSquare tempSquare;
             boolean intersects;
 
-            do { // make sure i create on square
+            do { // make sure I create one square before initializing loop
 
                 // do i need to keep track of these?
                 tempSquare = new NumberedSquare(screenWidth, screenHeight);
@@ -74,4 +75,16 @@ public class MainView extends View {
         }
     }
 
+
+    // lets attempt an ontouch event??
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+
+        int eventAction = event.getAction();
+
+        if (eventAction == MotionEvent.ACTION_DOWN){
+            System.out.println("THE SCREEN WAS PRESSED");
+        }
+        return false;
+    }
 }
