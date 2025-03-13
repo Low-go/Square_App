@@ -2,6 +2,7 @@ package com.example.square_app;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
 import android.content.Context;
@@ -10,18 +11,23 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Handler;
 
 public class MainView extends View {
     private float screenWidth, screenHeight;
     public boolean gameStarted;
 
     private List<NumberedSquare> squares;
-    private NumberedSquare testSquare;
+
+
+    private MassiveHandler ticker;
 
     // We will be making this game in portait mode
     public MainView(Context c){
         super(c);
         gameStarted = false;
+        ticker = new MassiveHandler();
+        ticker.sendEmptyMessageDelayed(0, 16); // why am i not just calling its method?
 
     }
 
@@ -92,5 +98,19 @@ public class MainView extends View {
             System.out.println("here is the square size " + squares.size());
         }
         return false;
+    }
+
+
+    // inner class, i dont really understand this
+    private class MassiveHandler extends Handler{
+
+        @Override
+        public void handleMessage(Message msg){
+            for (NumberedSquare square: squares){
+                square.move();
+            }
+            invalidate();
+            sendEmptyMessageDelayed(0, 16); //loop every 16ms
+        }
     }
 }

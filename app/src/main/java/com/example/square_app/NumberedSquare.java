@@ -15,7 +15,13 @@ public class NumberedSquare {
     private RectF bounds;
     private PointF velocity;
 
-    public NumberedSquare(float w, float h){
+    private float right;
+    private float bottom;
+
+    private float screenWidth;
+    private float screenHeight;
+
+    public NumberedSquare(float w, float h) {
 
         // this is for the outline
         outlinePaint = new Paint();
@@ -33,35 +39,56 @@ public class NumberedSquare {
         squareWidth = w * 0.22f;
         squareHeight = h * 0.12f;
 
+        //screen sized saved for later
+        screenWidth = w;
+        screenHeight = h;
+
         // random x y positions on map
         float x = (float) (Math.random() * (w - squareWidth)); // we subtract the squares size to make sure it does not get out of bounds
         float y = (float) (Math.random() * (h - squareHeight));
 
-        bounds = new RectF(x , y, x + squareWidth, y +  squareHeight);
+
+        right = x + squareWidth;
+        bottom = y + squareHeight;
+        bounds = new RectF(x, y, right, bottom);
 
 
         // this is for velocity
-        float velX = (float) (0.1 + (Math.random() * 0.9)); //keeping it between 0.1-1
-        float velY = (float) (0.1 + (Math.random() * 0.9));
-        velocity = new PointF(velX, velY);
+        float velX = (float) (1 + (Math.random() * 9)); //keeping it between 0.1-1
+//        float velY = (float) (1 + (Math.random() * 9));
+
+
+        velocity = new PointF(velX, velX);
 
     }
 
 
-    public void draw(Canvas c, int number){
+    public void draw(Canvas c, int number) {
 
         String numberText = String.valueOf(number + 1); // number that will be displayed
         c.drawRect(bounds, outlinePaint);
         c.drawText(numberText, bounds.centerX() - 9f, bounds.centerY() + 1.8f, textPaint);
     }
 
-    public void move(){
+    public void move() {
+
+        //hmm not really sure how
+
+        bounds.offset(velocity.x, velocity.y);
+
+        if (bounds.left < 0 || bounds.right > screenWidth) {
+            velocity.x = -velocity.x; //reverse it
+        }
+        if (bounds.top < 0 || bounds.bottom > screenHeight) {
+            velocity.y = -velocity.y;
+        }
+
 
     }
 
     // getter
-    public RectF getBounds(){
+    public RectF getBounds() {
         return bounds;
     }
-}
 
+}
