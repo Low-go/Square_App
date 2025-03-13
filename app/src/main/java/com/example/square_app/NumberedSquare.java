@@ -3,17 +3,17 @@ package com.example.square_app;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 
 public class NumberedSquare {
 
     private float squareWidth, squareHeight;
-
     private Paint outlinePaint;
-
     private Paint textPaint;
     private RectF bounds;
+    private PointF velocity;
 
     public NumberedSquare(float w, float h){
 
@@ -39,6 +39,12 @@ public class NumberedSquare {
 
         bounds = new RectF(x , y, x + squareWidth, y +  squareHeight);
 
+
+        // this is for velocity
+        float velX = (float) (0.1 + (Math.random() * 0.9)); //keeping it between 0.1-1
+        float velY = (float) (0.1 + (Math.random() * 0.9));
+        velocity = new PointF(velX, velY);
+
     }
 
 
@@ -49,7 +55,11 @@ public class NumberedSquare {
         c.drawText(numberText, bounds.centerX() - 9f, bounds.centerY() + 1.8f, textPaint);
     }
 
+    public void move(){
 
+    }
+
+    // getter
     public RectF getBounds(){
         return bounds;
     }
